@@ -1,7 +1,7 @@
 from flask import Flask, render_template, send_from_directory, render_template_string
 import os
 import random
-import request
+import requests
 
 from . import app
 
