@@ -1,4 +1,4 @@
-from src import DB as db
+from snaxads import DB as db
 from werkzeug.security import generate_password_hash, check_password_hash
 
 # Schema:

@@ -29,9 +29,9 @@ show_warning()
 print("Tables being reverted to default with fill values.")
 
 # Imports
-from src import DB as db
-from src import app
-import src.models as models
+from snaxads import DB as db
+from snaxads import app
+import snaxads.models as models
 import os
 
 # Setup some initial variables

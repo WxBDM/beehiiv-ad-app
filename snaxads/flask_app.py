@@ -3,8 +3,8 @@ import os
 import random
 import requests
 
-from src import APP as app
-from src import DB as db
+from snaxads import APP as app
+from snaxads import DB as db
 
 THIS_DIR = os.path.dirname(__file__)
 
