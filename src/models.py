@@ -1,4 +1,4 @@
-from . import DB as db
+from src import DB as db
 from werkzeug.security import generate_password_hash, check_password_hash
 
 # Schema:

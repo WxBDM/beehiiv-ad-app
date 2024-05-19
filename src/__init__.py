@@ -4,12 +4,17 @@
 - Initalizing the application with the Flask object
 - Connecting to the database
 - Setting up logging
+
+Note: the path should be pointing to the base repository.
 """
 
 from flask_sqlalchemy import SQLAlchemy
 from flask import Flask
 import os
-from dotenv import load_env
+from dotenv import load_dotenv
+import logging
+import pymysql
+import sys
 
 class EnvVariableError(Exception):
     """An error specific to env file/variables.
@@ -20,17 +25,19 @@ class EnvVariableError(Exception):
 #########################
 # Environment Variables #
 #########################
-load_env()
+load_dotenv()
 
-# Check the templates folder and initalize the app.
-template_folder = os.environ.get('SNAXADS_TEMPLATE_LOCATION', None)
-if not template_folder:
-    raise EnvVariableError(f'Template location not found. Is the env file sourced?')
+logging.info(f'__init__ file being invoked.')
+logging.info(f'Loaded environment file. Sample: {os.environ.get("SNAXADS_SAMPLE_ENV_VARIABLE", None)}')
 
 ############
 # App Init #
 ############
-app = Flask(__name__, template_folder=template_folder)
+template_folder = os.environ.get('SNAXADS_TEMPLATE_LOCATION', None)
+if not template_folder:
+    raise EnvVariableError(f'Template location not found. Is the env file sourced?')
+
+APP = Flask(__name__, template_folder=template_folder)
 
 #################
 # Database Init #
@@ -39,8 +46,6 @@ db_name = os.environ.get('SNAXADS_SQL_DATABASE', None)
 if not db_name:
     raise ValueError(f'DB Name not found. Is the env file sourced?')
 
-app.config['SQLALCHEMY_DATABASE_URI'] = db_name
-DB = SQLAlchemy(app)
-DB.init_app(app)
-
-# whatever else goes down here...
+pymysql.install_as_MySQLdb()
+APP.config['SQLALCHEMY_DATABASE_URI'] = db_name
+DB = SQLAlchemy(APP)

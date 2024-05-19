@@ -3,7 +3,8 @@ import os
 import random
 import requests
 
-from . import app
+from src import APP as app
+from src import DB as db
 
 THIS_DIR = os.path.dirname(__file__)
 
