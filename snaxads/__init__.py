@@ -16,6 +16,8 @@ import logging
 import pymysql
 import sys
 
+print(sys.path)
+
 class EnvVariableError(Exception):
     """An error specific to env file/variables.
     
