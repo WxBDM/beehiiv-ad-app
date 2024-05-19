@@ -1,2 +1,8 @@
 __pycache__
 .env
+
+# logfile location
+logfiles
+
+# the virtual environment
+ads-env

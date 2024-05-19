@@ -1,7 +1,9 @@
 from flask import Flask, render_template, send_from_directory, render_template_string
 import os
 import random
-app = Flask(__name__, template_folder='/home/bmolyneaux/pysnax_ads/templates')
+import request
+
+from . import app
 
 THIS_DIR = os.path.dirname(__file__)
 
@@ -39,6 +41,19 @@ def ad_content():
     </html>
     """
     return render_template_string(html_content)
+
+@app.route('/submit-ad', methods=['POST'])
+def submit_ad():
+    ad_data = {
+        'ad_title': request.form['ad_title'],
+        'ad_header': request.form['ad_header'],
+        'ad_body': request.form['ad_body'],
+        'ad_cta_text': request.form['ad_cta_text'],
+        'ad_cta_link': request.form['ad_cta_link'],
+        'ad_image_url': request.form['ad_image_url']
+    }
+    return render_template('ad_template.html', **ad_data)
+
 
 @app.route('/')
 def home():
